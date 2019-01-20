@@ -6,6 +6,11 @@ use Phalcon\Mvc\Application;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
+use Phalcon\Session\Adapter\Files as Session;
+
+use Phalcon\Flash\Session as FlashSession;
+
+
 
 // Define some absolute path constants to aid in locating resources
 define('BASE_PATH', dirname(__DIR__));
@@ -60,6 +65,37 @@ $di->set(
         );
     }
 );
+
+// Start the session the first time when some component request the session service
+$di->setShared(
+    'session',
+    function () {
+        $session = new Session();
+
+        $session->start();
+
+        return $session;
+    }
+);
+
+// Set up the flash session service
+$di->set(
+    'flashSession',
+    function () {
+        return new FlashSession(
+            [
+                'error'   => 'alert alert-danger',
+                'success' => 'alert alert-success',
+                'notice'  => 'alert alert-info',
+                'warning' => 'alert alert-warning',
+            ]
+        );
+    }
+);
+
+
+
+//
 
 $application = new Application($di);
 
