@@ -1,0 +1,71 @@
+
+<div class="row">
+    <div class="col-md-6">
+    <h2>Sign up using this form</h2>
+        <form action="/signup/register" method="post">
+            <div class="form-group">
+                <label for="email">First Name:</label>
+                <input type="text" name="firstname" class="form-control" id="firstname">
+            </div>
+            <div class="form-group">
+                <label for="email">Last Name:</label>
+                <input type="text" name="lastname" class="form-control" id="lastname">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control" id="lastname">
+            </div>
+
+            <div class="form-group">
+                <label for="sel1">Select list:</label>
+                <select class="form-control" name="gender" id="sel1">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" name="password" class="form-control" id="pwd">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Confirm Password:</label>
+                <input type="password" name="confirm_password" class="form-control" id="pwd">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+
+
+    </div>
+    <!--  -->
+
+    <div class="col-md-6">
+    <h2>Registered Users</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>First name</th>
+                        <th>last name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach($users as $user): ?>
+                    <tr>
+                        <td><?php echo $user->firstname; ?></td>
+                        <td><?php echo $user->lastname; ?></td>
+                        <td><?php echo $user->email; ?></td>
+                        <td><?php echo $user->gender; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
